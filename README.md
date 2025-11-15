@@ -30,6 +30,10 @@ are looking for.
 
 ### How do I add the output in Uptime Kuma?
 
+Here is a configured check in [Uptime Kuma](https://uptimekuma.org/).
+
+![Screenshot](https://i.imgur.com/aHfhStB.png)
+
 ### Can I fork/modify?
 
 Be my guest. If you think this script is missing some functionality that other can use, please make a PR.
