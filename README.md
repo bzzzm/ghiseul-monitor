@@ -1,7 +1,7 @@
 # Ghiseul.ro monitor
 
 An easy way to monitor if an institution is accessible on [ghiseul.ro](https://ghiseul.ro). The script uses
-[Selenium](https://www.selenium.dev/) to login to Ghiseul and check if that particular user can make a
+[Selenium](https://www.selenium.dev/) with ChromeDriver to login to Ghiseul and check if that particular user can make a
 payment to the institution you want to monitor. The output of the check is exposed over HTTP
 using Flask (port `8080` by default).
 
