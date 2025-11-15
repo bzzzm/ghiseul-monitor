@@ -19,10 +19,10 @@ docker run -it -p 8080:8080 --env-file .env ghiseul-monitor
 
 ### Ol' way
 
-1. Clone this repo
-2. Create an virtualenv with `python3 -m virtualenv .venv`
-3. Install requirements with `python3 -m pip install -r requirements.txt`
-4. Run it with `python3 main.py --username=blabla --password=secret --institution=1234` or create an `.env` file
+1. Clone this repo.
+2. Create an virtualenv with `python3 -m virtualenv .venv`.
+3. Install requirements with `python3 -m pip install -r requirements.txt`.
+4. Run it with `python3 main.py --username=blabla --password=secret --institution=1234` or create an `.env` file.
 
 ## FAQ
 
@@ -56,6 +56,12 @@ won't promise I will monitor these or answer in a reasonable time.
 
 ## TODO
 
-- [ ] Add support for `X-Forwarded-For`
-- [ ] Add interation number in the output
-- [ ] Specify timezone in the `date` key of the output
+- [ ] P0: Add support for `X-Forwarded-For` or `CF-Connecting-IP`.
+- [ ] P0: wrap `.get()` calls with try/except; better error handing in general.
+- [ ] P1: Add interation number in the output.
+- [ ] P1: Specify timezone in the `date` key of the output.
+- [ ] P2: Create `docker-compose.yml`.
+- [ ] P2: Create Helm chart.
+- [ ] P3: Log memory usage for each thread.
+- [ ] P3: Create a route for `/` to return a static message.
+- [ ] P3: Export metrics in prometheus format.
