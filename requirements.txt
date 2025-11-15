@@ -1,0 +1,4 @@
+selenium==4.38.0
+coloredlogs==15.0.1
+Flask==3.1.2
+dotenv==0.9.9
