@@ -253,6 +253,9 @@ class GhiseulMonitor:
 
         driver_options = Options()
         driver_options.add_argument("--user-data-dir=/tmp/chrome")
+        driver_options.add_argument("--headless")
+        driver_options.add_argument("--no-sandbox")
+        driver_options.add_argument("--window-size=1920,1080")
         self.driver = webdriver.Chrome(options=driver_options)
         self.wait = WebDriverWait(self.driver, timeout=self.render_timeout)
 
@@ -265,28 +268,31 @@ if __name__ == "__main__":
     # Parse CLI arguments
     parser = argparse.ArgumentParser(description="ghiseul.ro monitor")
     parser.add_argument(
-        "--refresh",
-        type=int,
-        default=int(os.environ.get("GHISEUL_REFRESH", "10")),
-        help="How often to refresh the monitor, in minutes. Environment variable: GHISEUL_REFRESH.",
-    )
-    parser.add_argument(
         "--username",
         type=str,
+        required=True,
         default=os.environ.get("GHISEUL_USERNAME", ""),
         help="Username to be used for logging in. Environment variable: GHISEUL_USERNAME.",
     )
     parser.add_argument(
         "--password",
         type=str,
+        required=True,
         default=os.environ.get("GHISEUL_PASSWORD", ""),
         help="Password to be used for logging in. Environment variable: GHISEUL_PASSWORD.",
     )
     parser.add_argument(
         "--institution",
         type=str,
+        required=True,
         default=os.environ.get("GHISEUL_INSTITUTION", ""),
         help="Institution ID to monitor. Environment variable: GHISEUL_INSTITUTION.",
+    )
+    parser.add_argument(
+        "--refresh",
+        type=int,
+        default=int(os.environ.get("GHISEUL_REFRESH", "10")),
+        help="How often to refresh the monitor, in minutes. Environment variable: GHISEUL_REFRESH.",
     )
     parser.add_argument(
         "--timeout",
@@ -357,7 +363,7 @@ if __name__ == "__main__":
     webapp = Flask("ghiseul.ro monitor")
 
     @webapp.route(args.web_endpoint)
-    def monitor():
+    def monitor_route():
         global OUTPUT
         return jsonify(OUTPUT)
 
