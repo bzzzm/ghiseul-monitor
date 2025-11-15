@@ -12,6 +12,11 @@ using Flask (port `8080` by default).
 Just pull the docker image and pass the proper environment variables or CLI arguments. You can also build your own
 image using the `Dockerfile`. Maybe in the future I'll create a basic Helm chart for Kubernetes.
 
+```bash
+docker pull ghcr.io/bzzzm/ghiseul-monitor
+docker run -it --net=host -p 8080:8080 --env-file .env ghiseul-monitor
+```
+
 ### Ol' way
 
 1. Clone this repo
