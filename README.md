@@ -53,3 +53,9 @@ script is allowed. Probably not, so use at your OWN risk.
 
 First try to run the script with `--help`, maybe that will give you the info you need. If not, open an issue, but I
 won't promise I will monitor these or answer in a reasonable time.
+
+## TODO
+
+- [ ] Add support for `X-Forwarded-For`
+- [ ] Add interation number in the output
+- [ ] Specify timezone in the `date` key of the output
