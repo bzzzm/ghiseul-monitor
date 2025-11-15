@@ -14,7 +14,7 @@ image using the `Dockerfile`. Maybe in the future I'll create a basic Helm chart
 
 ```bash
 docker pull ghcr.io/bzzzm/ghiseul-monitor
-docker run -it --net=host -p 8080:8080 --env-file .env ghiseul-monitor
+docker run -it -p 8080:8080 --env-file .env ghiseul-monitor
 ```
 
 ### Ol' way
