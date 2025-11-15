@@ -78,7 +78,7 @@ class GhiseulMonitor:
 
         i = 0
         log.info(
-            f"Starting ghiseul.ro monitor for institution={self.institution} {"with" if self.persistent_driver else "without"} persistent driver.")
+            f"Starting ghiseul.ro monitor {"with" if self.persistent_driver else "without"} persistent driver, institution={self.institution}, refresh={refresh}m")
         while True:
             log.info(f"Starting iteration {i}...")
 
@@ -88,7 +88,7 @@ class GhiseulMonitor:
 
             # Execute the monitor flows and send the ouput to the global OUTPUT
             OUTPUT = self.execute()
-            log.info(f"Fished iteration {i}, sleeping for {refresh} minutes. Current output={OUTPUT}")
+            log.info(f"Finished iteration {i}, sleeping for {refresh} minutes. Current output={OUTPUT}")
 
             # Sleep for refresh time
             time.sleep(refresh*60)
@@ -117,7 +117,7 @@ class GhiseulMonitor:
                 f"duration={round(flow_timer, 2)}s"
             )
             output["flows"][flow] = flow_output
-            output["error"] = f"{output["error"]}; {flow.upper()}: {flow_err}" if flow_err else output["error"]
+            output["error"] = f"{output["error"]}{flow.upper()}: {flow_err}; " if flow_err else output["error"]
             output["duration"] = round(output["duration"] + flow_timer, 2)
 
         # Final log output
@@ -256,6 +256,7 @@ class GhiseulMonitor:
         driver_options.add_argument("--headless")
         driver_options.add_argument("--no-sandbox")
         driver_options.add_argument("--window-size=1920,1080")
+        driver_options.add_argument("--disable-dev-shm-usage")
         self.driver = webdriver.Chrome(options=driver_options)
         self.wait = WebDriverWait(self.driver, timeout=self.render_timeout)
 
@@ -270,21 +271,18 @@ if __name__ == "__main__":
     parser.add_argument(
         "--username",
         type=str,
-        required=True,
         default=os.environ.get("GHISEUL_USERNAME", ""),
         help="Username to be used for logging in. Environment variable: GHISEUL_USERNAME.",
     )
     parser.add_argument(
         "--password",
         type=str,
-        required=True,
         default=os.environ.get("GHISEUL_PASSWORD", ""),
         help="Password to be used for logging in. Environment variable: GHISEUL_PASSWORD.",
     )
     parser.add_argument(
         "--institution",
         type=str,
-        required=True,
         default=os.environ.get("GHISEUL_INSTITUTION", ""),
         help="Institution ID to monitor. Environment variable: GHISEUL_INSTITUTION.",
     )
